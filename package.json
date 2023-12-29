@@ -1,0 +1,22 @@
+{
+  "name": "bat_stats_ui",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "start": "vite"
+  },
+  "dependencies": {
+    "@solidjs/router": "^0.10.5",
+    "@suid/icons-material": "*",
+    "@suid/material": "*",
+    "solid-js": "*"
+  },
+  "devDependencies": {
+    "@suid/vite-plugin": "*",
+    "typescript": "^4.8.2",
+    "vite": "*",
+    "vite-plugin-solid": "*"
+  }
+}
