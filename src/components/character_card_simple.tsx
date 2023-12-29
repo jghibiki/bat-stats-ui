@@ -8,7 +8,7 @@ export default function CharacterCardSimple(props) {
         character: null,
     }, props)
 
-    const characterStats = () => {
+    const column1 = () => {
         return [
             {
                 "name": "willpower",
@@ -18,6 +18,11 @@ export default function CharacterCardSimple(props) {
                 "name": "endurance",
                 "value": merged.character.endurance
             },
+        ]
+    }
+
+    const column2 = () => {
+        return [
             {
                 "name": "attack",
                 "value": merged.character.attack
@@ -46,23 +51,25 @@ export default function CharacterCardSimple(props) {
                 </Box>
             </Toolbar>
         </AppBar>
-        <Stack spacing={1} sx={{ margin: 1 }}>
-            <Box sx={{ textAlign: "center" }}>
-                <img src={merged.character.image} style={{ "width": "200px" }} />
-            </Box>
-            <Grid container>
-                <Grid item xs={2} />
-                <Grid item xs={8} >
-                    <Stack spacing={0.1}>
-                        <For each={characterStats()}>{(statPair, i) =>
-                            <StatDisplay name={statPair.name} value={statPair.value} />
-                        }</For>
-                    </Stack>
-                </Grid>
-                <Grid item xs={2} />
+        <Grid container spacing={1} sx={{ padding: 1 }}>
+            <Grid item sm={6}>
+                <Box sx={{ textAlign: "center" }} borderColor="main.primary">
+                    <img src={merged.character.image} style={{ "width": "150px" }} />
+                </Box>
+                <For each={column1()}>{(statPair, i) =>
+                    <StatDisplay name={statPair.name} value={statPair.value} />
+                }</For>
+
             </Grid>
-            {/*fix for bottom margin not working */}
-            <Box style={{ "height": "1px" }}></Box>
-        </Stack>
+            <Grid item sm={6} >
+                <Grid container direction="column" justifyContent="flex-end" sx={{ height: "100%" }}>
+                    <For each={column2()}>{(statPair, i) =>
+                        <Grid item>
+                            <StatDisplay name={statPair.name} value={statPair.value} />
+                        </Grid>
+                    }</For>
+                </Grid>
+            </Grid>
+        </Grid>
     </Paper >
 }

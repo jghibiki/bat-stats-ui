@@ -24,7 +24,7 @@ export default function CardViewerTest() {
     return <div>
         <Button variant="contained" onClick={toggleCompactMode} sx={{ marginBottom: 1 }}>Toggle Compact</Button>
 
-        <Grid container spacing={2}>
+        <Grid container spacing={2} justifyContent="center">
             <For each={characters().splice(0, 20)}>{(character, i) =>
                 <Grid item>
                     <CharacterCard character={character} compactMode={compactMode()} />

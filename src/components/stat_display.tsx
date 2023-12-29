@@ -13,8 +13,8 @@ export default function StatDisplay(props) {
         <Grid item xs={9}
             borderColor="primary.dark"
             sx={{
-                border: 2,
-                borderRadius: "0% 0% 8px 8px",
+                border: 3,
+                borderRadius: "8px 0px 0px 8px",
                 textAlign: "center",
                 padding: 1
             }}
@@ -25,7 +25,7 @@ export default function StatDisplay(props) {
             borderColor="primary.main"
             sx={{
                 border: 2,
-                borderRadius: "0% 0% 8px 8px",
+                borderRadius: "0px 8px 8px 0px",
                 textAlign: "center",
                 padding: 1
             }}
