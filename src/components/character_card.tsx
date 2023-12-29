@@ -1,4 +1,4 @@
-import { Paper, Grid, Typography, Stack, Box } from "@suid/material"
+import { Paper, Grid, Typography, Stack, Box, AppBar, Toolbar, Theme } from "@suid/material"
 import { mergeProps } from "solid-js";
 import { Show, For, Match, Switch } from "solid-js";
 
@@ -34,45 +34,66 @@ export default function CharacterCardSimple(props) {
                 "name": "movement",
                 "value": merged.character.movement
             },
-        ]
+        ].map((e) => {
+            return {
+                ...e,
+                "name": e.name[0].toUpperCase() + e.name.slice(1)
+            }
+        })
     }
 
-    return <Paper style={{ "padding": "10px", "width": merged.compactMode ? "250px" : "400px" }}>
+    return <Paper sx={{ "width": merged.compactMode ? 300 : 400, borderRadius: 2 }}>
         <Show when={merged.character} fallback={<p>Loading...</p>}>
             <Switch>
                 <Match when={merged.compactMode}>
-                    <Stack spacing={1}>
-                        <div>
-                            <Typography variant="body2" fontWeight={500}>{merged.character.alias}</Typography>
-                            <Typography variant="body2">{merged.character.name}</Typography>
-                        </div>
-                        <div style={{ "text-align": "center" }}>
-                            <img src={merged.character.image} style={{ width: "200px", "border": "solid 1px white" }} />
-                        </div>
-                        <div>
-                            <For each={characterStats()}>{(statPair, i) =>
-                                <Grid container>
-                                    <Grid item xs={8}
-                                        style={{
-                                            "border": "1px solid white",
-                                            "border-radius": "0% 0% 8px 8px",
-                                            "text-align": "center",
-                                            "padding": "5px"
-                                        }}>
-                                        {statPair.name}
-                                    </Grid>
-                                    <Grid item xs={4}
-                                        style={{
-                                            "border": "1px solid #A1A1A1",
-                                            "border-radius": "0% 0% 8px 8px",
-                                            "text-align": "center",
-                                            "padding": "5px"
-                                        }}>
-                                        {statPair.value}
-                                    </Grid>
-                                </Grid>
-                            }</For>
-                        </div>
+                    <AppBar position="static" color="primary" enableColorOnDark={true}>
+                        <Toolbar>
+                            <Box>
+                                <Typography variant="body2" fontWeight={1000} component="div" sx={{ flexGrow: 1 }} >{merged.character.alias}</Typography>
+                                <Typography variant="body2" component="div">{merged.character.name}</Typography>
+                            </Box>
+                        </Toolbar>
+                    </AppBar>
+                    <Stack spacing={1} sx={{ margin: 1 }}>
+                        <Box sx={{ textAlign: "center" }}>
+                            <img src={merged.character.image} style={{ "width": "200px" }} />
+                        </Box>
+                        <Grid container>
+                            <Grid item xs={2} />
+                            <Grid item xs={8} >
+                                <Stack spacing={0.1}>
+                                    <For each={characterStats()}>{(statPair, i) =>
+                                        <Grid container justifyContent="center">
+                                            <Grid item xs={9}
+                                                borderColor="primary.dark"
+                                                sx={{
+                                                    border: 2,
+                                                    borderRadius: "0% 0% 8px 8px",
+                                                    textAlign: "center",
+                                                    padding: 1
+                                                }}
+                                            >
+                                                {statPair.name}
+                                            </Grid>
+                                            <Grid item xs={3}
+                                                borderColor="primary.main"
+                                                sx={{
+                                                    border: 2,
+                                                    borderRadius: "0% 0% 8px 8px",
+                                                    textAlign: "center",
+                                                    padding: 1
+                                                }}
+                                            >
+                                                {statPair.value}
+                                            </Grid>
+                                        </Grid>
+                                    }</For>
+                                </Stack>
+                            </Grid>
+                            <Grid item xs={2} />
+                        </Grid>
+                        {/*fix for bottom margin not working */}
+                        <Box style={{ "height": "1px" }}></Box>
                     </Stack>
                 </Match>
                 <Match when={!merged.compactMode}>
