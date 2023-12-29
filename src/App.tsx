@@ -3,7 +3,7 @@ import { Button, Box, Container } from "@suid/material";
 import { Router } from "@solidjs/router"
 import { grey } from "@suid/material/colors";
 import { routes } from './routes/route_manifest';
-import { createSignal, createMemo } from "solid-js";
+import { createSignal, createMemo, onMount } from "solid-js";
 
 export default function App() {
 
@@ -45,12 +45,22 @@ export default function App() {
 
   const theme = createTheme({ palette: palette });
 
+  // Set background color on first load
+  onMount(() => {
+    document.body.style.backgroundColor = themeMode() === 'light' ? '#fff' : '#303030'
+  })
+
   function onClick() {
-    setThemeMode((prev) => (prev === 'light' ? 'dark' : 'light'));
+
+    setThemeMode((prev) => {
+      // update background color when the theme mode changes.
+      document.body.style.backgroundColor = prev === 'light' ? '#303030' : '#fff'
+      return (prev === 'light' ? 'dark' : 'light')
+    });
   }
 
 
-  return <Box sx={{ background: themeMode() === "light" ? "#fff" : "#303030" }}>
+  return <Box>
     <ThemeProvider theme={theme}>
       <Button onClick={onClick} color="primary" variant="contained">Toggle</Button>
       <Container>
