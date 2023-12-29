@@ -1,7 +1,6 @@
 import { createTheme, ThemeProvider, createPalette } from "@suid/material/styles";
-import { Button, Box, Container } from "@suid/material";
+import { Switch, FormControlLabel, Box, Container, AppBar, Toolbar, Typography } from "@suid/material";
 import { Router } from "@solidjs/router"
-import { grey } from "@suid/material/colors";
 import { routes } from './routes/route_manifest';
 import { createSignal, createMemo, onMount } from "solid-js";
 
@@ -23,7 +22,10 @@ export default function App() {
               main: '#2962ff',
             },
             background: {
-              default: "#000",
+              paper: "#606060"
+            },
+            text: {
+              primary: "#fff"
             }
 
           } : {
@@ -43,18 +45,23 @@ export default function App() {
     });
   });
 
-  const theme = createTheme({ palette: palette });
+  const theme = createTheme({
+    palette: palette,
+    typography: {
+      fontFamily: "Roboto"
+    }
+  });
 
   // Set background color on first load
   onMount(() => {
-    document.body.style.backgroundColor = themeMode() === 'light' ? '#fff' : '#303030'
+    document.body.style.backgroundColor = themeMode() === 'light' ? '#f2f2f2' : '#303030'
   })
 
   function onClick() {
 
     setThemeMode((prev) => {
       // update background color when the theme mode changes.
-      document.body.style.backgroundColor = prev === 'light' ? '#303030' : '#fff'
+      document.body.style.backgroundColor = prev === 'light' ? '#303030' : '#f2f2f2'
       return (prev === 'light' ? 'dark' : 'light')
     });
   }
@@ -62,12 +69,20 @@ export default function App() {
 
   return <Box>
     <ThemeProvider theme={theme}>
-      <Button onClick={onClick} color="primary" variant="contained">Toggle</Button>
-      <Container>
+      <AppBar position="absolute" color="primary" enableColorOnDark>
+        <Toolbar>
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>Bat Stats</Typography>
+          <FormControlLabel
+            control={<Switch color="secondary" checked={themeMode() === "dark"} onMouseDown={onClick} />}
+            label="Dark Mode?"
+          />
+        </Toolbar>
+      </AppBar>
+      <Box sx={{ marginTop: 10 }}>
         <Router>
           {routes}
         </Router>
-      </Container>
+      </Box>
     </ThemeProvider>
   </Box>
 

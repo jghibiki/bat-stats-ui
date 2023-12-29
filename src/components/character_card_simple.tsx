@@ -1,6 +1,6 @@
-import { Paper, Grid, Typography, Stack, Box, AppBar, Toolbar, Theme } from "@suid/material"
+import { Paper, Grid, Typography, Stack, Box, AppBar, Toolbar } from "@suid/material"
 import { mergeProps } from "solid-js";
-import { Show, For, Match, Switch } from "solid-js";
+import { Show, For, Match } from "solid-js";
 import StatDisplay from './stat_display'
 
 export default function CharacterCardSimple(props) {
