@@ -3,6 +3,8 @@ import { Switch, FormControlLabel, Box, Container, AppBar, Toolbar, Typography }
 import { Router } from "@solidjs/router"
 import { routes } from './routes/route_manifest';
 import { createSignal, createMemo, onMount } from "solid-js";
+import "@fontsource/noto-sans/400.css";
+import "@fontsource/roboto-condensed/500.css";
 
 export default function App() {
 
@@ -26,7 +28,8 @@ export default function App() {
             },
             text: {
               primary: "#fff"
-            }
+            },
+            divider: "#000"
 
           } : {
             primary: {
@@ -39,7 +42,7 @@ export default function App() {
               default: "#303030",
               paper: "#424242"
             },
-            divider: "#fff"
+            divider: "#000"
           }
       )
     });
@@ -48,7 +51,9 @@ export default function App() {
   const theme = createTheme({
     palette: palette,
     typography: {
-      fontFamily: "Roboto"
+      //fontFamily: "Noto Sans",
+      fontFamily: "Roboto Condensed",
+      fontSize: 14
     }
   });
 

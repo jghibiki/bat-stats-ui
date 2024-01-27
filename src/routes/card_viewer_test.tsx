@@ -1,19 +1,22 @@
 import { Container } from "@suid/material"
 import CharacterCard from "../components/character_card"
 import { onMount, createSignal } from "solid-js";
-import type { Character } from '../models/character'
 import { For } from "solid-js";
 import { Grid, Button } from "@suid/material"
+import { GameDataService } from "../service/game_data_service";
+import { CharacterModel } from "../models/optimized/character_model";
 
 export default function CardViewerTest() {
 
-    const [characters, setCharacters] = createSignal<Array<Character>>([])
+    const [characters, setCharacters] = createSignal<Array<CharacterModel>>([])
     const [compactMode, setCompactMode] = createSignal<Boolean>(true)
 
     onMount(async () => {
-        const result = await fetch("http://localhost:8080/character")
+        const game_data_service = GameDataService.getInstance()
+        let result = await game_data_service.getCharactersByPage()
+        let nonEternalCharacters = result.data.filter(x => !x.eternal)
         setCharacters(
-            (await result.json() as Array<Character>).filter(x => !x.eternal)
+            nonEternalCharacters
         )
     })
 

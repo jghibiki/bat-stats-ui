@@ -4,13 +4,14 @@ import { mergeProps } from "solid-js";
 export default function StatDisplay(props) {
     const merged = mergeProps({
         name: null,
-        value: null
+        value: null,
+        fontSize: "body1"
     }, props)
 
     const name = () => merged.name[0].toUpperCase() + merged.name.slice(1)
 
     return <Grid container justifyContent="center">
-        <Grid item xs={9}
+        <Grid item xs={8}
             borderColor="primary.dark"
             sx={{
                 border: 3,
@@ -19,9 +20,11 @@ export default function StatDisplay(props) {
                 padding: 1
             }}
         >
-            {name()}
+            <Typography variant={merged.fontSize}>
+                {name()}
+            </Typography>
         </Grid>
-        <Grid item xs={3}
+        <Grid item xs={4}
             borderColor="primary.main"
             sx={{
                 border: 2,
