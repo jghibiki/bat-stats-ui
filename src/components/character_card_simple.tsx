@@ -25,19 +25,27 @@ export default function CharacterCardSimple(props) {
         return [
             {
                 "name": "attack",
-                "value": merged.character.attack
+                "value": merged.character.attack,
+                "fontSize": "body2"
+
             },
             {
                 "name": "defense",
-                "value": merged.character.defense
+                "value": merged.character.defense,
+                "fontSize": "body2"
+
             },
             {
                 "name": "strength",
-                "value": merged.character.strength
+                "value": merged.character.strength,
+                "fontSize": "body2"
+
             },
             {
                 "name": "movement",
-                "value": merged.character.movement
+                "value": merged.character.movement,
+                "fontSize": "body2"
+
             },
         ]
     }
@@ -46,8 +54,8 @@ export default function CharacterCardSimple(props) {
         <AppBar position="static" color="primary" enableColorOnDark={true}>
             <Toolbar>
                 <Box>
-                    <Typography variant="body2" fontWeight={1000} component="div" sx={{ flexGrow: 1 }} >{merged.character.alias}</Typography>
-                    <Typography variant="body2" component="div">{merged.character.name}</Typography>
+                    <Typography variant="body1" fontWeight={500} component="div" sx={{ flexGrow: 1 }} >{merged.character.alias}</Typography>
+                    <Typography variant="body1" component="div">{merged.character.name}</Typography>
                 </Box>
             </Toolbar>
         </AppBar>

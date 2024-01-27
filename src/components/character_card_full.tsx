@@ -125,94 +125,59 @@ export default function CharacterCardFull(props) {
         <Grid item>
             <Grid container>
                 <Grid item xs backgroundColor="#383838">
-                    <Show when={merged.character.weapons !== undefined && merged.character.weapons.length > 0}
-                        fallback={
-                            <Grid container spacing={1} padding={1}>
-                                <Grid item sm={3}>
-                                    <Typography variant="body2" textAlign="center">
-                                        -
-                                    </Typography>
-                                </Grid>
-                                <Grid item sm={1}>
-                                    <Typography variant="body2" textAlign="center">
-                                        -
-                                    </Typography>
-                                </Grid>
-                                <Grid item sm={1}>
-                                    <Typography variant="body2" textAlign="center">
-                                        -
-                                    </Typography>
-                                </Grid>
-                                <Grid item sm={1}>
-                                    <Typography variant="body2" textAlign="center">
-                                        -
-                                    </Typography>
-                                </Grid>
-                                <Grid item sm={6}>
-                                    <Typography variant="body2" textAlign="center">
-                                        -
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-                        }>
+                    <Show
+                        when={merged.character.weapons !== undefined && merged.character.weapons.length > 0}
+                    >
                         <For each={merged.character.weapons}>{(weapon, idx) =>
                             <>
                                 <Grid container spacing={1} padding={0.5}>
-                                    <Grid item sm={3}>
-                                        <Typography variant="body1" textAlign="center">
-                                            {weapon.name}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item sm={1}>
-                                        <Typography variant="body1" textAlign="center">
+                                    <Grid item sm={4} container direction={"column"}>
+                                        <Grid item xs>
+                                            <Typography variant="body1" textAlign="center">
+                                                {weapon.name}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs container>
                                             <Show
-                                                when={weapon.damage !== null}
-                                                fallback={"-"}
+                                                when={weapon.damage !== null && weapon.damage.length !== 0}
                                             >
-                                                <For each={weapon.damage}>{(damage) =>
-                                                    <Repeat times={damage.count}>
-                                                        <img src={
-                                                            damage.damage_type_id == 1 ?
-                                                                "src/static/img/icons/blood.svg" :
-                                                                "src/static/img/icons/stun.svg"
-                                                        } />
-                                                    </Repeat>
-                                                }</For>
-
+                                                <Grid item xs>
+                                                    <Typography variant="body1" textAlign="center">
+                                                        <For each={weapon.damage}>{(damage) =>
+                                                            <Repeat times={damage.count}>
+                                                                <img src={
+                                                                    damage.damage_type_id == 1 ?
+                                                                        "src/static/img/icons/blood.svg" :
+                                                                        "src/static/img/icons/stun.svg"
+                                                                } />
+                                                            </Repeat>
+                                                        }</For>
+                                                    </Typography>
+                                                </Grid>
                                             </Show>
-                                            <span>
-                                                {weapon.damage.map(e =>
-                                                    e.weapon_type_id
-                                                )}
-                                            </span>
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item sm={1}>
-                                        <Typography variant="body1" textAlign="center">
-                                            {
-                                                weapon.rate_of_fire !== null ?
-                                                    <span>
+                                            <Show
+                                                when={weapon.rate_of_fire !== null}
+                                            >
+                                                <Grid item xs>
+                                                    <Typography variant="body1" textAlign="center">
                                                         <span style={{ "margin-right": "1px" }}>{weapon.rate_of_fire.toString()}</span>
                                                         <img src="src/static/img/icons/yellow_rof_icon.svg" />
-                                                    </span>
-                                                    :
-                                                    "-"
-                                            }
-
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item sm={1}>
-                                        <Typography variant="body1" textAlign="center">
+                                                    </Typography>
+                                                </Grid>
+                                            </Show>
                                             <Show
                                                 when={weapon.ammunition !== null}
-                                                fallback={"-"}
                                             >
-                                                <span>
-                                                    <span>{weapon.ammunition.toString()}</span>
-                                                    <img src="src/static/img/icons/yellow_ammo_icon.svg" />
-                                                </span>
+                                                <Grid item xs>
+                                                    <Typography variant="body1" textAlign="center">
+                                                        <span>
+                                                            <span>{weapon.ammunition.toString()}</span>
+                                                            <img src="src/static/img/icons/yellow_ammo_icon.svg" />
+                                                        </span>
+                                                    </Typography>
+                                                </Grid>
                                             </Show>
-                                        </Typography>
+                                        </Grid>
                                     </Grid>
                                     <Grid item sm={6}>
                                         <Show
