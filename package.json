@@ -8,9 +8,14 @@
     "start": "vite"
   },
   "dependencies": {
+    "@fontsource/noto-sans": "^5.0.18",
+    "@fontsource/roboto": "^5.0.8",
+    "@fontsource/roboto-condensed": "^5.0.14",
+    "@solid-primitives/range": "^0.1.16",
     "@solidjs/router": "^0.10.5",
     "@suid/icons-material": "*",
     "@suid/material": "*",
+    "object-hash": "^3.0.0",
     "solid-js": "*"
   },
   "devDependencies": {

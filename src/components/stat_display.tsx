@@ -33,7 +33,9 @@ export default function StatDisplay(props) {
                 padding: 1
             }}
         >
-            {merged.value}
+            <Typography variant={merged.fontSize}>
+                {merged.value}
+            </Typography>
         </Grid>
     </Grid>
 }

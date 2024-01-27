@@ -5,6 +5,18 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@fontsource/noto-sans':
+    specifier: ^5.0.18
+    version: 5.0.18
+  '@fontsource/roboto':
+    specifier: ^5.0.8
+    version: 5.0.8
+  '@fontsource/roboto-condensed':
+    specifier: ^5.0.14
+    version: 5.0.14
+  '@solid-primitives/range':
+    specifier: ^0.1.16
+    version: 0.1.16(solid-js@1.8.7)
   '@solidjs/router':
     specifier: ^0.10.5
     version: 0.10.5(solid-js@1.8.7)
@@ -14,6 +26,9 @@ dependencies:
   '@suid/material':
     specifier: '*'
     version: 0.15.1(solid-js@1.8.7)
+  object-hash:
+    specifier: ^3.0.0
+    version: 3.0.0
   solid-js:
     specifier: '*'
     version: 1.8.7
@@ -569,6 +584,18 @@ packages:
     dev: true
     optional: true
 
+  /@fontsource/noto-sans@5.0.18:
+    resolution: {integrity: sha512-tPMBWiI268eApqBl6QyAH0I3dvLaHuECJ9H1S0Ve2qd380tuPcHSJaeBv4CEha643hJ+KH1Nm7FnHhQSeZvHHw==}
+    dev: false
+
+  /@fontsource/roboto-condensed@5.0.14:
+    resolution: {integrity: sha512-ZNBHUhE5/3z9efMIjpBblFsfLHgGotJjlzKd5Q8DODbkRRWy6Yh+JnbiaJZ8zwQyHyYBNOolk57BG4BcjSzrRg==}
+    dev: false
+
+  /@fontsource/roboto@5.0.8:
+    resolution: {integrity: sha512-XxPltXs5R31D6UZeLIV1td3wTXU3jzd3f2DLsXI8tytMGBkIsGcc9sIyiupRtA8y73HAhuSCeweOoBqf6DbWCA==}
+    dev: false
+
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
     engines: {node: '>=6.0.0'}
@@ -706,6 +733,23 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@solid-primitives/range@0.1.16(solid-js@1.8.7):
+    resolution: {integrity: sha512-sttRaKTpxTnT4MtzBlVlFhYK9OZlFkcjmVcX2IdWxQY5q/53xlIerQNyH3G8FOFgpRLHIdP3BpovAczqyIB4xw==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/utils': 6.2.2(solid-js@1.8.7)
+      solid-js: 1.8.7
+    dev: false
+
+  /@solid-primitives/utils@6.2.2(solid-js@1.8.7):
+    resolution: {integrity: sha512-11ypVbp987XxETeRqY5Y3OmmTpm8/jZqJXRvo6AyqBthzkvvjEdReuUMU2yVb+pwWGxfZpWHZ6EUCcGXUMhfwg==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      solid-js: 1.8.7
+    dev: false
 
   /@solidjs/router@0.10.5(solid-js@1.8.7):
     resolution: {integrity: sha512-gxDeiyc97j8/UqzuuasZsQYA7jpmlwjkfpcay11Q2xfzoKR50eBM1AaxAPtf0MlBAdPsdPV3h/k8t5/XQCuebA==}
@@ -1048,6 +1092,11 @@ packages:
   /node-releases@2.0.14:
     resolution: {integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==}
     dev: true
+
+  /object-hash@3.0.0:
+    resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
+    engines: {node: '>= 6'}
+    dev: false
 
   /picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}

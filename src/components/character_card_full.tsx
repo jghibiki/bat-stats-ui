@@ -1,4 +1,5 @@
 import { Divider, Paper, Grid, Typography, Stack, Box, AppBar, Toolbar, Table, TableBody, TableRow, TableCell, TableContainer } from "@suid/material"
+import { Repeat } from "@solid-primitives/range"
 import { Switch, mergeProps } from "solid-js";
 import { Show, For, Match, createResource } from "solid-js";
 import StatDisplay from './stat_display'
@@ -7,6 +8,7 @@ import { RawCharacter } from "../models/raw/raw_character";
 import { Weapon } from "../models/raw/weapon";
 import { Trait } from "../models/raw/trait";
 import ModalTraitDisplay from './modal_trait_display'
+import { DamageModel } from "../models/optimized/damage_model";
 
 export default function CharacterCardFull(props) {
     const merged = mergeProps({
@@ -28,6 +30,11 @@ export default function CharacterCardFull(props) {
                 "value": merged.character.endurance,
                 "fontSize": "body2"
             },
+        ]
+    }
+
+    const column2 = () => {
+        return [
             {
                 "name": "attack",
                 "value": merged.character.attack,
@@ -40,6 +47,11 @@ export default function CharacterCardFull(props) {
                 "fontSize": "body2"
 
             },
+        ]
+    }
+
+    const column3 = () => {
+        return [
             {
                 "name": "strength",
                 "value": merged.character.strength,
@@ -55,8 +67,7 @@ export default function CharacterCardFull(props) {
         ]
     }
 
-
-    return <Paper sx={{ "width": 700, borderRadius: 2 }}>
+    return <Paper sx={{ "width": 500, borderRadius: 2 }}>
         <AppBar position="static" color="primary" enableColorOnDark={true}>
             <Toolbar>
                 <Box>
@@ -65,65 +76,177 @@ export default function CharacterCardFull(props) {
                 </Box>
             </Toolbar>
         </AppBar>
-        <Grid container direction="row">
-            <Grid item sm={3} padding={1}>
-                <Box sx={{ textAlign: "center" }} borderColor="main.primary">
-                    <img src={merged.character.image} style={{ "width": "100px" }} />
-                </Box>
-                <For each={column1()}>{(statPair, i) =>
-                    <StatDisplay name={statPair.name} value={statPair.value} fontSize={statPair.fontSize} />
-                }</For>
-
-            </Grid>
-            <Grid item sm={9} backgroundColor={"#383838"}>
-                <Grid container spacing={1} sx={{ padding: 1 }} >
-                    <Show when={merged.character.weapons !== undefined && merged.character.weapons.length > 0}
-                        fallback={
-                            <>
-                                <Grid item sm={4}>
-                                    -
-                                </Grid>
-                                <Grid item sm={4}>
-                                    -
-                                </Grid>
-                                <Grid item sm={4}>
-                                    -
-                                </Grid>
-                            </>
-                        }>
-                        <For each={merged.character.weapons}>{(weapon, idx) =>
-                            <>
-                                <Grid item sm={2}>
-                                    {weapon.name}
-                                </Grid>
-                                <Grid item sm={2}>
-                                    {weapon.damage !== null ? weapon.damage.map(e => e.damage_type_name).toString() : "-"}
-                                </Grid>
-                                <Grid item sm={1}>
-                                    {weapon.rate_of_fire !== null ? weapon.rate_of_fire.toString() : "-"}
-                                </Grid>
-                                <Grid item sm={1}>
-                                    {weapon.ammunition !== null ? weapon.ammunition.toString() : "-"}
-                                </Grid>
-                                <Grid item sm={6}>
-                                    <Show
-                                        when={weapon.traits !== null && weapon.traits.length > 0}
-                                        fallback={<span>-</span>}
-                                    >
-                                        <Grid container spacing={0.5}>
-                                            <For each={weapon.traits}>{(characterTrait) =>
-                                                <Grid item xs="auto">
-                                                    <ModalTraitDisplay trait={characterTrait.trait} name_override={characterTrait.alternate_name} />
+        <Grid container>
+            <Grid item xs>
+                <Grid container direction="row">
+                    <Grid item sm={3} padding={1}>
+                        <Box sx={{ textAlign: "center" }} borderColor="main.primary">
+                            <img src={merged.character.image} style={{ "width": "130px", "margin-left": "-8px" }} />
+                        </Box>
+                    </Grid>
+                    <Grid item sm={9} >
+                        <Grid container spacing={1} sx={{ padding: 1 }} direction={"column"} >
+                            <Grid item xs sx={{ marginBottom: 1 }}>
+                                <Grid container spacing={1}>
+                                    <Grid item xs>
+                                        <Grid container direction={"column"}>
+                                            <For each={column1()}>{(statPair, i) =>
+                                                <Grid item>
+                                                    <StatDisplay name={statPair.name} value={statPair.value} fontSize={statPair.fontSize} />
                                                 </Grid>
                                             }</For>
                                         </Grid>
-                                    </Show>
+                                    </Grid>
+                                    <Grid item xs>
+                                        <Grid container direction={"column"}>
+                                            <For each={column2()}>{(statPair, i) =>
+                                                <Grid item>
+                                                    <StatDisplay name={statPair.name} value={statPair.value} fontSize={statPair.fontSize} />
+                                                </Grid>
+                                            }</For>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid item xs>
+                                        <Grid container direction={"column"}>
+                                            <For each={column2()}>{(statPair, i) =>
+                                                <Grid item>
+                                                    <StatDisplay name={statPair.name} value={statPair.value} fontSize={statPair.fontSize} />
+                                                </Grid>
+                                            }</For>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
-                                <Divider />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid item>
+            <Grid container>
+                <Grid item xs backgroundColor="#383838">
+                    <Show when={merged.character.weapons !== undefined && merged.character.weapons.length > 0}
+                        fallback={
+                            <Grid container spacing={1} padding={1}>
+                                <Grid item sm={3}>
+                                    <Typography variant="body2" textAlign="center">
+                                        -
+                                    </Typography>
+                                </Grid>
+                                <Grid item sm={1}>
+                                    <Typography variant="body2" textAlign="center">
+                                        -
+                                    </Typography>
+                                </Grid>
+                                <Grid item sm={1}>
+                                    <Typography variant="body2" textAlign="center">
+                                        -
+                                    </Typography>
+                                </Grid>
+                                <Grid item sm={1}>
+                                    <Typography variant="body2" textAlign="center">
+                                        -
+                                    </Typography>
+                                </Grid>
+                                <Grid item sm={6}>
+                                    <Typography variant="body2" textAlign="center">
+                                        -
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        }>
+                        <For each={merged.character.weapons}>{(weapon, idx) =>
+                            <>
+                                <Grid container spacing={1} padding={0.5}>
+                                    <Grid item sm={3}>
+                                        <Typography variant="body1" textAlign="center">
+                                            {weapon.name}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item sm={1}>
+                                        <Typography variant="body1" textAlign="center">
+                                            <Show
+                                                when={weapon.damage !== null}
+                                                fallback={"-"}
+                                            >
+                                                <For each={weapon.damage}>{(damage) =>
+                                                    <Repeat times={damage.count}>
+                                                        <img src={
+                                                            damage.damage_type_id == 1 ?
+                                                                "src/static/img/icons/blood.svg" :
+                                                                "src/static/img/icons/stun.svg"
+                                                        } />
+                                                    </Repeat>
+                                                }</For>
+
+                                            </Show>
+                                            <span>
+                                                {weapon.damage.map(e =>
+                                                    e.weapon_type_id
+                                                )}
+                                            </span>
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item sm={1}>
+                                        <Typography variant="body1" textAlign="center">
+                                            {
+                                                weapon.rate_of_fire !== null ?
+                                                    <span>
+                                                        <span style={{ "margin-right": "1px" }}>{weapon.rate_of_fire.toString()}</span>
+                                                        <img src="src/static/img/icons/yellow_rof_icon.svg" />
+                                                    </span>
+                                                    :
+                                                    "-"
+                                            }
+
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item sm={1}>
+                                        <Typography variant="body1" textAlign="center">
+                                            <Show
+                                                when={weapon.ammunition !== null}
+                                                fallback={"-"}
+                                            >
+                                                <span>
+                                                    <span>{weapon.ammunition.toString()}</span>
+                                                    <img src="src/static/img/icons/yellow_ammo_icon.svg" />
+                                                </span>
+                                            </Show>
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item sm={6}>
+                                        <Show
+                                            when={weapon.traits !== null && weapon.traits.length > 0}
+                                            fallback={<span>-</span>}
+                                        >
+                                            <Grid container spacing={0.5}>
+                                                <For each={weapon.traits}>{(characterTrait) =>
+                                                    <Grid item xs="auto">
+                                                        <ModalTraitDisplay trait={characterTrait.trait} name_override={characterTrait.alternate_name} />
+                                                    </Grid>
+                                                }</For>
+                                            </Grid>
+                                        </Show>
+                                    </Grid>
+                                </Grid>
+                                <Show when={(merged.character.weapons.length - 1) !== idx()}>
+                                    <Divider sx={{ marginTop: 0.5, marginBottom: 0.5 }} />
+                                </Show>
                             </>
                         }</For>
                     </Show>
                 </Grid>
+            </Grid>
+            <Grid xs>
+                <Box sx={{ margin: 1 }}>
+                    <Grid container>
+                        <For each={merged.character.traits}>{(characterTrait) =>
+                            <Grid item xs="auto">
+                                <ModalTraitDisplay trait={characterTrait.trait} name_override={characterTrait.alternate_name} />
+                            </Grid>
+                        }</For>
+                    </Grid>
+                </Box>
             </Grid>
         </Grid>
     </Paper >
