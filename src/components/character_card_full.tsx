@@ -1,14 +1,10 @@
 import { Divider, Paper, Grid, Typography, Stack, Box, AppBar, Toolbar, Table, TableBody, TableRow, TableCell, TableContainer } from "@suid/material"
 import { Repeat } from "@solid-primitives/range"
-import { Switch, mergeProps } from "solid-js";
-import { Show, For, Match, createResource } from "solid-js";
+import { mergeProps } from "solid-js";
+import { Show, For } from "solid-js";
 import StatDisplay from './stat_display'
 import { GameDataService } from "../service/game_data_service";
-import { RawCharacter } from "../models/raw/raw_character";
-import { Weapon } from "../models/raw/weapon";
-import { Trait } from "../models/raw/trait";
 import ModalTraitDisplay from './modal_trait_display'
-import { DamageModel } from "../models/optimized/damage_model";
 
 export default function CharacterCardFull(props) {
     const merged = mergeProps({
@@ -108,7 +104,7 @@ export default function CharacterCardFull(props) {
                                     </Grid>
                                     <Grid item xs>
                                         <Grid container direction={"column"}>
-                                            <For each={column2()}>{(statPair, i) =>
+                                            <For each={column3()}>{(statPair, i) =>
                                                 <Grid item>
                                                     <StatDisplay name={statPair.name} value={statPair.value} fontSize={statPair.fontSize} />
                                                 </Grid>

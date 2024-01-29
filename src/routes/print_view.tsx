@@ -7,8 +7,8 @@ import { GameDataService } from "../service/game_data_service";
 import { CharacterModel } from "../models/optimized/character_model";
 import { CardMode } from "../enums/card_mode_enum";
 
-export default function CardViewerTest() {
 
+export default function PrintView() {
     const [characters, setCharacters] = createSignal<Array<CharacterModel>>([])
     const [compactMode, setCompactMode] = createSignal<Boolean>(true)
     const [page, setPage] = createSignal(1)
@@ -97,11 +97,10 @@ export default function CardViewerTest() {
             <Grid container spacing={1} justifyContent="center">
                 <For each={characters().splice(0, 20)}>{(character, i) =>
                     <Grid item>
-                        <CharacterCard character={character} mode={compactMode() ? CardMode.COMPACT : CardMode.FULL} />
+                        <CharacterCard character={character} mode={CardMode.PRINT} />
                     </Grid>
                 }</For>
             </Grid>
         </Show>
     </Box>
-
 }
