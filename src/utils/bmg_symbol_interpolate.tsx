@@ -91,5 +91,5 @@ export const splitTraitNameAndSymbol = (name) => {
         }
     }
 
-    return (updatedName, icon)
+    return [updatedName, icon]
 }

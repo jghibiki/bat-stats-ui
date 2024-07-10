@@ -143,8 +143,8 @@ export default function CharacterCardFull(props) {
                                                             <Repeat times={damage.count}>
                                                                 <img src={
                                                                     damage.damage_type_id == 1 ?
-                                                                        "src/static/img/icons/blood.svg" :
-                                                                        "src/static/img/icons/stun.svg"
+                                                                        "/src/static/img/icons/blood.svg" :
+                                                                        "/src/static/img/icons/stun.svg"
                                                                 } />
                                                             </Repeat>
                                                         }</For>
@@ -157,7 +157,7 @@ export default function CharacterCardFull(props) {
                                                 <Grid item xs>
                                                     <Typography variant="body1" textAlign="center">
                                                         <span style={{ "margin-right": "1px" }}>{weapon.rate_of_fire.toString()}</span>
-                                                        <img src="src/static/img/icons/yellow_rof_icon.svg" />
+                                                        <img src="/src/static/img/icons/yellow_rof_icon.svg" />
                                                     </Typography>
                                                 </Grid>
                                             </Show>
@@ -168,7 +168,7 @@ export default function CharacterCardFull(props) {
                                                     <Typography variant="body1" textAlign="center">
                                                         <span>
                                                             <span>{weapon.ammunition.toString()}</span>
-                                                            <img src="src/static/img/icons/yellow_ammo_icon.svg" />
+                                                            <img src="/src/static/img/icons/yellow_ammo_icon.svg" />
                                                         </span>
                                                     </Typography>
                                                 </Grid>

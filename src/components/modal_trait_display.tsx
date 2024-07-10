@@ -27,7 +27,7 @@ export default function ModalTraitDisplay(props) {
             onClick={handleOpen}
             onDelete={icon ? handleOpen : null}
             label={updatedName}
-            deleteIcon={icon}
+            deleteIcon={icon || null}
             variant="outlined" />
     }
 

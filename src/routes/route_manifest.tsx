@@ -6,7 +6,11 @@ export const routes = [
         component: lazy(() => import("./card_viewer_test.tsx"))
     },
     {
-        path: "/card/print",
+        path: "/card/print/:id",
         component: lazy(() => import("./print_view.tsx"))
+    },
+    {
+        path: "/compendium",
+        component: lazy(() => import("./compendium.tsx"))
     }
 ]

@@ -10,6 +10,7 @@ import { WeaponTrait } from "../models/raw/weapon_trait";
 import { WeaponTraitModel } from "../models/optimized/weapon_trait_model";
 import { interpolateBmgIcons } from "../utils/bmg_symbol_interpolate";
 import { CharacterTraitModel } from "../models/optimized/character_trait_model";
+import { useParams } from "@solidjs/router";
 
 const theme = createTheme({
     palette: {
@@ -165,9 +166,9 @@ export default function CharacterCardPrint(props) {
     })
 
     return <ThemeProvider theme={theme}>
-        <Grid container>
+        <Grid container id="printable-card-root">
             <Grid item xs={6}>
-                <Paper id="printable-card-front" sx={{ "width": "500px", height: "700px" }} >
+                <Paper id="printable-card-front" sx={{ "width": "498px", height: "698px", border: 2 }} >
                     <AppBar position="static" color="primary" enableColorOnDark={true}>
                         <Toolbar>
                             <Box>
@@ -187,6 +188,7 @@ export default function CharacterCardPrint(props) {
                         >
                             <Grid item xs >
                                 <img
+                                    id="printable-card-character-image"
                                     src={merged.character.image}
                                     style={{
                                         "width": "335px",
@@ -346,7 +348,7 @@ export default function CharacterCardPrint(props) {
                 </Paper >
             </Grid>
             <Grid>
-                <Paper id="printable-card-back" sx={{ "width": "498px", height: "700px", borderLeft: 2, }} >
+                <Paper id="printable-card-back" sx={{ "width": "498px", height: "700px", border: 2, }} >
                     <Box textAlign="center" paddingTop={1}>
                         <Typography
                             variant="body1"
@@ -399,6 +401,6 @@ export default function CharacterCardPrint(props) {
                 </Paper>
             </Grid>
         </Grid>
-    </ThemeProvider>
+    </ThemeProvider >
 }
 

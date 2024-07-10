@@ -74,6 +74,12 @@ export class GameDataService {
         return characters
     }
 
+    public async getCharacterById(app_version_id: null | number = null, id: number): Promise<CharacterModel> {
+        let selected_app_version_id = await this.resolve_app_data_version_or_get_latest(app_version_id)
+        let characters = await this.character_service.getById(selected_app_version_id, id)
+        return characters
+    }
+
     public async getCharacters(app_version_id: null | number = null, ids: Array<number>): Promise<PaginationResult<CharacterModel>> {
         // TODO
         /*

@@ -6,6 +6,7 @@ import { Grid, Button } from "@suid/material"
 import { GameDataService } from "../service/game_data_service";
 import { CharacterModel } from "../models/optimized/character_model";
 import { CardMode } from "../enums/card_mode_enum";
+import { useParams } from "@solidjs/router";
 
 
 export default function PrintView() {
@@ -16,21 +17,38 @@ export default function PrintView() {
     const [totalResults, setTotalResults] = createSignal<null | number>(null)
     const [loading, setLoading] = createSignal(true)
 
+    const params = useParams()
+
+    const hasSpecificId = () => {
+        return params.id !== undefined && params.id !== null
+    }
+
+
     createEffect(async () => {
         const game_data_service = GameDataService.getInstance()
         setLoading(true)
-        let result = await game_data_service.getCharactersByPage(null, page())
-        let nonEternalCharacters = result.data.filter(x => !x.eternal)
-        setCharacters(
-            nonEternalCharacters
-        )
-        setMaxPage(
-            result.total_pages
-        )
-        setTotalResults(
-            result.total_pages
-        )
-        setLoading(false)
+
+        if (hasSpecificId()) {
+            let result = await game_data_service.getCharacterById(null, params.id)
+            console.log(result)
+            setCharacters(
+                [result]
+            )
+            setLoading(false)
+        }
+        else {
+            let result = await game_data_service.getCharactersByPage(null, page())
+            setCharacters(
+                result.data
+            )
+            setMaxPage(
+                result.total_pages
+            )
+            setTotalResults(
+                result.total_pages
+            )
+            setLoading(false)
+        }
     })
 
     const hasPreviousPage = () => {

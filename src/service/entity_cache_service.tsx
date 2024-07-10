@@ -17,18 +17,8 @@ export abstract class EntityCacheService<A extends GameDataEntity> {
         app_data_version: Number,
         entity_ids: Array<Number>,
     ): Promise<Array<A>> {
-        if (this.entityCache.has(app_data_version)) {
-            // we already have the data cached, just return it.
-            console.log("Using cached reference for '" + this.entityUrl + "': " + entity_ids.toString())
-            let entities = this.entityCache.get(app_data_version)
-            let filteredEntities = entities.filter(el => entity_ids.includes(el.app_id))
-            console.log("Filtered entities resolved:" + filteredEntities.toString())
-            return filteredEntities
-        }
-        else {
-            // we need to fetch and cache the data.
-            return (await this.loadAll(app_data_version)).filter(el => entity_ids.includes(el.app_id))
-        }
+        let entities = this.load(app_data_version, null)
+        return entities
     }
 
     public async getPage(
@@ -45,9 +35,20 @@ export abstract class EntityCacheService<A extends GameDataEntity> {
         return await response.json() as PaginationResult<A>
     }
 
-    private async loadAll(app_data_version: Number): Promise<Array<A>> {
-        return await this.load(app_data_version, null)
+    public async getById(
+        app_data_version: number,
+        id: number
+    ): Promise<A> {
+        let response = await fetch(`${this.baseUrl}/${this.entityUrl}/id/${id}?app_version=${app_data_version}`)
+
+        if (response.status != 200) {
+            let text = await response.text()
+            throw new Error(`Failed to fetch ${this.entityUrl} entity data. Full error: ${text}`)
+        }
+
+        return await response.json() as A
     }
+
 
     private async load(app_data_version: Number, entity_ids: Array<Number> | null): Promise<Array<A>> {
 
