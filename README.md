@@ -10,6 +10,7 @@
 
 ## Available Routes
 ### Card viewer
+
 Link: http://localhost:5173/card/
 
 - This view has a toggle to switch between a "compact" view of character cards, and a "full version of character cards.
@@ -26,6 +27,7 @@ Link: http://localhost:5173/card/
 ### Single Card Print Mode
 
 **Single Card Print Mode**
+
 Link: http://localhost:5173/card/print/1
 
 ![print card view](readme_assets/print_card_view_2024_08_10.png)
