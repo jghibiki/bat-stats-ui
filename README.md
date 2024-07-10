@@ -17,10 +17,10 @@ Link: http://localhost:5173/card/
 
 
 **Compact mode**
-!(readme_assets/compact_card_view_2024_08_10.png)
+![compact card view](readme_assets/compact_card_view_2024_08_10.png)
 
 **full mode**
-!(readme_assets/full_card_view_2024_08_10.png)
+![full card view](readme_assets/full_card_view_2024_08_10.png)
 
 
 ### Single Card Print Mode
@@ -28,13 +28,13 @@ Link: http://localhost:5173/card/
 **Single Card Print Mode**
 Link: http://localhost:5173/card/print/1
 
-!(readme_assets/print_card_view_2024_08_10.png)
+![print card view](readme_assets/print_card_view_2024_08_10.png)
 
 
 ### Compendium 
 Link: http://localhost:5173/compendium
 
-!(readme_assets/compendium_view_2024_08_10.png)
+![compendium view](readme_assets/compendium_view_2024_08_10.png)
 
 ## Developers
 
